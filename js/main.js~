@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+
+class Person {
+    constructor (name, age)
+    {
+	this._name = name;
+	this.age = age;
+    }
+
+    getName = () =>
+    {
+	console.log(this.name);
+    }
+
+    getAge = () =>
+    {
+	console.log(this.age);
+    }
+    get name()
+    {
+	return this._name;
+    }
+    set name(na)
+    {
+	this._name = na;
+    }
+
+    static greet() {
+	let name = "jojo"
+	console.log(`hello from ${this}`);
+    }
+}
+
+let jojo = new Person("jojo", 20);
+
+jojo.getName();
+jojo.name = "Hello jojo";
+jojo.getName();
+jojo.age = 43;
+jojo.getAge();
+jojo.email = "jojothomas1515@gmail.com";
+console.log(jojo.email);
+
+Person.greet();

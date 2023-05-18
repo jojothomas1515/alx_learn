@@ -1,0 +1,16 @@
+<?php
+
+<html lang=en>
+  <head>
+    <title> TESTING FORM </title>
+  </head>
+
+  <form method="post">
+    <label for="name">Username</label>
+    <input id="name" type="text"/>
+    <label for="password">Password</label>
+    <input id="password" type="password">
+    <input type="submit"/>
+  </form>
+</html>
+?>

@@ -1,0 +1,9 @@
+#!/usr/bin/ruby
+
+require "csv"
+
+CSV.open("emails.csv") do |emails|
+  emails.read.each.with_index do |date, from, subject, idx|
+    puts "#{date} #{from} #{subject}"
+  end
+end

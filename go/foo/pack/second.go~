@@ -1,0 +1,5 @@
+package pads
+
+func GreetMe() {
+	println("hello how are you")
+}

@@ -1,0 +1,26 @@
+---
+- name: setup puppet
+  hosts: web_servers
+  become: yes
+
+  tasks:
+    - name: add puppet repo
+      apt:
+        deb: https://apt.puppet.com/puppet7-release-focal.deb
+        state: present
+
+    - name: "Update Repository cache"
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+        force_apt_get: true
+
+    - name: install puppet
+      apt:
+        name: puppet
+        state: absent
+        purge: true
+    - name: install puppet agent
+      apt:
+        name: puppet-agent
+        state: present

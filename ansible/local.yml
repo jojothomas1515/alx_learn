@@ -1,0 +1,18 @@
+---
+- name: create file
+  hosts: localhost
+  connection: local
+
+  vars:
+    filenames:
+      - jojo.txt
+      - beans.txt
+      - rice.txt
+
+  tasks:
+    - name: create file and say hello
+      copy:
+        content: "hey {{ item }} this is hello from jojo thoms"
+        dest: "{{ item }}"
+
+      loop: "{{ filenames }}"

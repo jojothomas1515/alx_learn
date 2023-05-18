@@ -1,0 +1,43 @@
+package main;
+
+import util.MyMath;
+
+
+class Hello {
+	public static void main (String[]args) {
+		var number = 22;
+		System.out.println(number);
+		loopn(50);
+		Person jojo = new Person("Jojo Thomas", 24);
+		jojo.print_info();
+		System.out.println(jojo.toUp());
+		System.out.printf("The square of 8 is %d\n", MyMath.square(8));
+	}
+
+	public static void loopn(int times) {
+		for (int i = 0; i < times; i++)
+			System.out.println("hello man");
+	}
+}
+
+
+class Person {
+	private String name;
+	private int age;
+
+	public Person(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	public void print_info() {
+		String text = "Hello my name is " +this.name + "and my age is ";
+		System.out.println(text);
+		System.out.println(this.age);
+	}
+
+	public String toUp()
+	{
+		return this.name.toUpperCase();
+	}
+}
