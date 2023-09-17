@@ -1,0 +1,5 @@
+#!/usr/bin/ruby
+
+require './randfunc';
+
+printHello('jojo thomas');

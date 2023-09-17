@@ -1,0 +1,41 @@
+---
+- name: setup mysql
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: copy signature to server
+      copy:
+        src: signature.key
+        dest: /tmp/signature.key
+
+    - name: add mysql signature key
+      apt_key:
+        file: /tmp/signature.key
+        state: present
+
+    # - name: mysql 5 repo
+    #   apt_repository:
+    #     repo: "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7"
+    #     state: "present"
+
+    # - name: "Update Repository cache"
+    #   apt:
+    #     update_cache: true
+    #     cache_valid_time: 3600
+    #     force_apt_get: true
+
+    - name: mysql client
+      apt:
+        name: mysql-client=5.7*
+        state: present
+
+    - name: mysql community server
+      apt:
+        name: mysql-community-server=5.7*
+        state: present
+
+    - name: mysql server
+      apt:
+        name: mysql-server=5.7*
+        state: present

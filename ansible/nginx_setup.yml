@@ -1,0 +1,74 @@
+---
+- name: setup basic nginx
+  hosts: "{{ HOST }}"
+  become: yes
+
+  vars:
+    paths:
+      - /data/web_static/releases/test/
+      - /data/web_static/shared/
+
+  tasks:
+    - name: install nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+
+    - name: setup index.html
+      copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+
+    - name: setup not_found.html;
+      copy:
+        content: "Ceci n'est pas une page"
+        dest: /var/www/html/not_found.html
+
+    - name: create data directory
+      file:
+        state: directory
+        path: "{{item}}"
+        owner: ubuntu
+        group: ubuntu
+        
+      loop: "{{ paths }}"
+
+
+    - name: create symbolic link
+      file:
+        state: link
+        src: "{{ paths[0] }}"
+        dest: /data/web_static/current
+
+    - name: holbertion file
+      copy:
+        content: |
+          "
+          <html>
+          <head>
+          </head>
+          <body>
+          Holberton School
+          </body>
+          </html>
+          "
+        dest: "{{ paths[0] }}.index.html"
+
+    - name: conf nginx
+      copy:
+        src: ./myconf.conf
+        dest: /etc/nginx/sites-available/default
+
+      notify:
+        - restart_nginx
+
+  handlers:
+    - name: restart_nginx
+      service:
+        name: nginx
+        state: restarted

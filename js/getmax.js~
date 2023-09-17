@@ -1,0 +1,7 @@
+#!/usr/bin/node
+function getMaxSubSum(li) {
+    console.log(li[1]);
+}
+
+const li = [1, 2, 3, 4, 5];
+getMaxSubSum(li);

@@ -1,0 +1,20 @@
+---
+- name: create file named jojo is amazing
+  hosts: "web_servers"
+  become: yes
+  tasks:
+    - name: remove nginx
+      apt:
+        name: nginx-common
+        state: absent
+
+    - name: ensured file is present
+      copy:
+        content: hello jojo thomas
+        dest: ~/jojo.txt
+
+    - name: "copy local to remote"
+      copy:
+        src: ./main.rb
+        dest: ~/
+        mode: 0777

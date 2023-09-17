@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define CHAR_SIZE 1028
+
+void gstrcpy(char *dest, char *str, char *name)
+{
+	while (*str != '\0') {
+
+		if (*str == '%') {
+			str++;
+			if (*str == 's')
+			{
+				for (int i=0; name[i] != '\0'; dest++, i++)
+				{
+					*dest = name[i];
+				}
+				str++;
+			}
+		}
+		else {
+			*dest = *str;
+			dest++;
+			str++;
+		}
+	}
+}
+char *greeting(char *name) {
+	char *res = malloc(CHAR_SIZE);
+
+	if (res == NULL)
+		return NULL;
+	gstrcpy(res, "Hello %s there how are you", name);
+	return (res);
+}
+int main(void) {
+	printf("%s", greeting("Jojo Thomas"));
+	return (0);
+}

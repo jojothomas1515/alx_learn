@@ -1,0 +1,37 @@
+	section .text
+	global _start
+
+_start:
+	mov rax, 4
+	mov rbx, 1
+	mov rcx, msg
+	mov rdx, 1
+	int 0x80
+	mov rcx, 10
+	mov [cc], BYTE '1'
+
+loop_1:
+	mov rax, 4
+	mov rbx, 1
+	push rcx
+	mov rcx, cc
+	mov rdx, 1
+	int 0x80
+	mov rax, cc
+	sub rax, '0'
+	inc rax
+	add rax, '0'
+	mov [cc], rax
+	pop rcx
+	dec rcx
+	jnz loop_1
+
+	mov rax, 1
+	int 0x80
+
+	section .data
+	msg DB "a"
+
+	section .bss
+	cm resb 1
+	cc resb 1

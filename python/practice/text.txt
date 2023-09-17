@@ -1,0 +1,3 @@
+WARNING:failure_logger:Cannot divide with 0
+ERROR:failure_logger:could not convert string to float: '22 /2'
+INFO:success_logger:Divide 22.0 with 2.0 successfully

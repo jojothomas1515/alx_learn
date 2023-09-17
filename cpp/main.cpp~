@@ -1,0 +1,29 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+vector<int> twoSum(vector<int>& nums, int target) {
+        int length = nums.size();
+	cout << "lenght is " << length << endl;
+        for (int i = 0; i < length; i++) {
+		for (int j = i + 1; j < length; j++) {
+			vector<int> res{i, j};
+			return res;
+		}
+        }
+        vector<int> v{};
+        return v;
+}
+
+int main() {
+	vector<int> v{2, 3, 5, 6, 7, 23, 12};
+	cout << v[1] << endl;
+	vector<int> q;
+	q = twoSum(v, 8);
+
+	for(auto i: q) {
+		cout << i << endl;
+	}	return 0;
+}

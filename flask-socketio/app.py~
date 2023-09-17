@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+
+"""Example."""
+
+from flask import Flask, render_template, request
+from flask_socketio import SocketIO
+import json
+from datetime import datetime as dt
+
+app = Flask(__name__)
+sio = SocketIO(app)
+
+connected_sid:dict = {}
+other_users:list = []
+
+@sio.event
+def connect():
+    print("hello connected")
+    connected_sid[user.id] = request.sid
+    pass
+
+@sio.event
+def disconnect():
+    print("hello man")
+    other_users.remove(request.sid)
+    pass
+
+@sio.on("play")
+def play(data):
+
+    # res = json.loads(data)
+    # print(res.get("message"))
+    # res["time"] = dt.now().isoformat()
+    # sio.emit("play", json.dumps(res))
+    sid = connected_sid.get(user.id)
+    if sid:
+        sio.emit("play", data, room=sid)
+    pass
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+if __name__ == "__main__":
+
+    sio.run(app, debug=True)

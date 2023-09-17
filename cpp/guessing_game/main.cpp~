@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+int main(void) {
+	int target = rand() % 100;
+
+	while (true)
+	{
+		try {
+		int guess;
+		cin >> guess;
+		cout << typeid(guess).name() << endl;
+		} catch (int e) {
+			cout << "error" << endl;
+		}
+	}
+	return 0;
+}

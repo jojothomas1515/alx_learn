@@ -1,0 +1,20 @@
+---
+- name: "some change"
+  hosts: web_servers
+  become: yes
+
+  tasks:
+
+    - name: change conf
+      copy:
+        src: ./myconf.conf
+        dest: /etc/nginx/sites-available/default
+
+      notify: restart_nginx
+
+  handlers:
+    - name: restart_nginx
+      service:
+        name: nginx
+        state: restarted
+        

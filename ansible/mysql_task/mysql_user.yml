@@ -1,0 +1,26 @@
+---
+- name: create sql users
+  hosts: web_servers
+  become: yes
+
+  tasks:
+
+    - name: pip
+      apt:
+        name: python3-pip
+        state: present
+        
+    - name: sqlconnector
+      pip:
+        name: PyMySQL
+        state: present
+
+    - name: holberton user
+      community.mysql.mysql_user:
+        login_user: root
+        name: holberton_user
+        host: localhost
+        password: projectcorrection280hbtn
+        priv: '*.*:REPLICATION CLIENT'
+        state: present
+      become: true
